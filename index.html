@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mon Application Vue.js</title>
+</head>
+<body>
+    
+<div id="app">
+    <div>
+        <h2>Montrer ma couleur préférée</h2>
+        <button @click="showColor">Cliquer ici</button>
+    </div>
+   <div>
+    <h2>Changer ma couleur préférée</h2>
+    <label for="cahgen-color">Changer la couleur : {{ favoriteColor }}</label>
+    <input id="change-color" type="text" v-model="favoriteColor"/>
+   </div>
+
+    <h1>VueMart</h1>
+    
+    <h2>Panier</h2>
+    <ul>
+        <li v-for="item in ShoppingCart">
+        <a v-bind:href="item.url" v-if="item.cost > 0"> {{ item.label }} : {{ item.cost }} </a>
+        </li>
+    </ul>
+    <p>Total: {{ totalPrice }}€</li>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+    el: '#app',
+    data: {
+        ShoppingCart : [
+            {label: 'Apples',
+             cost: 10,
+             url: '/apples.html'
+            },
+            {
+             label: 'Bananes',
+             cost: 115,
+             url: '/apples.html'
+            },
+            {
+            label: 'Coconuts',
+             cost: 553,
+             url: '/apples.html'
+            }
+        ],
+        favoriteColor: 'bleu'
+    },
+    computed: {
+        totalPrice(){
+            let total = 0;
+            this.ShoppingCart.forEach(item => {
+                total+=item.cost
+                
+            });
+             return total
+            }
+    },
+    methods: {
+        showColor(){
+            alert(this.favoriteColor)
+        },
+        changeColor(){
+            this.favoriteColor = document.getElementById("change-color").value
+        },
+    },
+})
+</script>
+</body>
+</html>
